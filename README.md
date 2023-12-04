@@ -1,35 +1,42 @@
-<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
-
 # Java Development Crash Course
 
-   * [Section 1: Core Java](#section-1-core-java)
-   * [Section 2: Maven ](#section-2-maven)
-      + [Maven Introduction:  ](#maven-introduction)
-      + [Maven in IDE ](#maven-in-ide)
-      + [Getting Dependencies:  ](#getting-dependencies)
-      + [Effective POM:  ](#effective-pom)
-      + [Maven Archetype:  ](#maven-archetype)
-      + [How Maven Works:](#how-maven-works)
-   * [Section 3: JDBC](#section-3-jdbc)
-   * [Section 4: Getting Started](#section-4-getting-started)
-   * [Section 5: Spring Boot](#section-5-spring-boot)
-   * [Section 6: Spring Core - loC](#section-6-spring-core---loc)
-   * [Section 7: Spring MVC](#section-7-spring-mvc)
-   * [Section 8: Spring ORM](#section-8-spring-orm)
-   * [Section 9: Spring Data JPA](#section-9-spring-data-jpa)
-   * [Section 10: Spring REST](#section-10-spring-rest)
-   * [Section 11: Spring AOP](#section-11-spring-aop)
-   * [Section 12: Spring Security](#section-12-spring-security)
-   * [Section 13: Docker](#section-13-docker)
-   * [Section 14: Microservices](#section-14-microservices)
-   * [Section 15: DSA (Optional)](#section-15-dsa-optional)
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Section 1: Core Java](#section-1-core-java)
+- [Section 2: Maven ](#section-2-maven)
+   * [Maven Introduction:  ](#maven-introduction)
+   * [Maven in IDE ](#maven-in-ide)
+   * [Getting Dependencies:  ](#getting-dependencies)
+   * [Effective POM:  ](#effective-pom)
+   * [Maven Archetype:  ](#maven-archetype)
+   * [How Maven Works:](#how-maven-works)
+- [Section 3: JDBC](#section-3-jdbc)
+   * [JDBC Introduction ](#jdbc-introduction)
+   * [Postgres Setup ](#postgres-setup)
+   * [JDBC Steps  ](#jdbc-steps)
+   * [Postgres Library jar](#postgres-library-jar)
+   * [Connecting Java and DB](#connecting-java-and-db)
+   * [Execute and Process](#execute-and-process)
+   * [Crud operations](#crud-operations)
+   * [Problems with Statement](#problems-with-statement)
+- [Section 4: Getting Started](#section-4-getting-started)
+- [Section 5: Spring Boot](#section-5-spring-boot)
+- [Section 6: Spring Core - loC](#section-6-spring-core---loc)
+- [Section 7: Spring MVC](#section-7-spring-mvc)
+- [Section 8: Spring ORM](#section-8-spring-orm)
+- [Section 9: Spring Data JPA](#section-9-spring-data-jpa)
+- [Section 10: Spring REST](#section-10-spring-rest)
+- [Section 11: Spring AOP](#section-11-spring-aop)
+- [Section 12: Spring Security](#section-12-spring-security)
+- [Section 13: Docker](#section-13-docker)
+- [Section 14: Microservices](#section-14-microservices)
+- [Section 15: DSA (Optional)](#section-15-dsa-optional)
 
 <!-- TOC end -->
 
 ## Section 1: Core Java
 ## Section 2: Maven 
 ### Maven Introduction:  
-
   - Introduction to Maven: 
       - Maven is a project management tool.
       - It is essential beyond syntax and concepts when building a project.
@@ -243,6 +250,461 @@
       - It's essential to prioritize security and follow best practices when working with external libraries and dependencies.
   
 ## Section 3: JDBC
+
+
+### JDBC Introduction 
+  - Introduction to JDBC: 
+      - Stands for Java Database Connectivity.
+      - In the software industry, data interaction is crucial, and applications are built to store, fetch, and update data.
+      - Initial data handling involves storing data in variables, but this is temporary, and data is lost when the application is closed.
+  - Permanent Data Storage:
+      - Need arises to store data permanently.
+      - Storing data in a plain text (TXT) file is an option but is limited in terms of searchability and relational structure.
+  - Relational Database Management System (RDBMS):
+      - RDBMS allows data storage in a tabular format.
+      - Provides a structured way to store and manage data permanently.
+  - SQL (Structured Query Language):
+      - SQL is used to interact with databases.
+      - Learning SQL may not be practical for regular users or clients.
+  - Database Connectivity with Java:
+      - Application acts as an intermediary between the user and the database.
+      - The application is built in Java, allowing users to interact with a console-based application.
+  - JDBC (Java Database Connectivity):
+      - JDBC is an API (Application Programming Interface) in the Java Development Kit (JDK).
+      - Provides a standardized way for Java applications to connect with databases.
+  - Challenges with Multiple DBMS:
+      - Various database management systems (DBMS) exist, such as Oracle, Postgres, MySQL, H2, DB2.
+      - Connecting Java applications to different DBMS requires specific implementation code.
+  - Dynamic Implementation with JDBC:
+      - JDBC API provides interfaces and classes for connectivity but requires actual implementation from the DBMS.
+      - Each DBMS, like Postgres or MySQL, provides its implementation library for Java applications to connect.
+  - Changing DBMS and Code Adaptation:
+      - Changing DBMS, for example, from Postgres to MySQL, may require significant changes to the code.
+      - JDBC simplifies this by providing a consistent API while leaving the implementation details to the specific DBMS library.
+  - Series Focus on Postgres:
+      - The series will use Postgres as the DBMS.
+      - Installation of the chosen DBMS and acquiring the necessary library (JAR file) for connectivity will be covered in upcoming videos.
+  - Next Steps:
+      - Ensure the installation of the chosen DBMS.
+      - Acquire the required JAR file/library for JDBC connectivity.
+      - Explore the implementation of JDBC for connecting Java applications with the chosen database.
+
+### Postgres Setup 
+  - Setting Up Postgres: 
+      - Download Postgres from the official website: postgresql.org.
+      - Install the appropriate version based on the operating system (Mac, Windows, Linux).
+      - During installation, set a secure password for Postgres.
+  - PgAdmin Interface:
+      - PgAdmin is installed along with Postgres and provides a graphical interface for database management.
+      - Access PgAdmin using the set password.
+      - Familiarize with the Object Explorer, Servers, Database, and Dashboard sections.
+  - Creating a Database:
+      - In PgAdmin, right-click on Servers > Postgres version > Databases.
+      - Create a new database, e.g., "Demo," with default settings and owner as "Postgres."
+      - Explore the Database dashboard, schemas, and tables.
+  - Creating a Table:
+      - Right-click on Tables > Create Table.
+      - Define a table name, e.g., "Student."
+      - Specify columns like "Sid" (integer, primary key), "Sname" (text), "Marks" (integer).
+      - Save to create the table.
+  - Inserting Data:
+      - Use the SQL query tool to insert data into the "Student" table.
+      - Example query: INSERT INTO Student VALUES (1, 'Ahmed', 99); 
+      - Execute the query to insert data into the table.
+      - View the inserted data in the table.
+  - Troubleshooting Data Types:
+      - Be mindful of data types during table creation (e.g., use "text" for string in Postgres).
+      - In case of errors, alter the table structure or recreate columns with correct data types.
+  - Viewing Data:
+      - Use PgAdmin's graphical interface to view all rows in the table.
+      - Explore the query tool to write SQL queries for data manipulation.
+  - Next Steps:
+      - The tutorial introduces manual database setup and data insertion.
+      - Future lessons will focus on using JDBC to interact with the database from Java code.
+      - JDBC will provide a programmatic way to connect, query, and manipulate the database using Java.
+
+### JDBC Steps  
+  - Steps for JDBC: 
+      - 1. Import Packages:
+          - Import the java.sql package in Java, which contains classes and interfaces for JDBC operations.
+      - 2. Load and Register Driver:
+          - Load and register the JDBC driver specific to your database.
+          - In JDBC versions prior to 4.0, this step was crucial, but newer versions (JDBC 4.0 onwards) often handle this automatically when adding the JDBC driver JAR to the project.
+      - 3. Create a Connection:
+          - Establish a connection to the database.
+          - This is akin to having a working phone and network in a real-world analogy.
+      - 4. Execute a Statement:
+          - Prepare and execute SQL statements.
+          - Analogous to thinking about what you want to say before making a call.
+      - 5. Process the Result:
+          - Handle the results obtained from the executed SQL statements.
+          - Similar to processing the response received during a phone call.
+      - 6. Close the Connection:
+          - Properly close the connection to release resources and avoid memory leaks.
+          - Similar to ending a phone call to prevent additional charges.
+      - 7. Optional Steps (Depending on Version and Context):
+          - Load and Register Driver (Optional):
+              - Loading and registering the driver can be optional in certain JDBC versions and contexts, especially after JDBC 4.0.
+          - Importing Packages (Optional):
+              - Some tutorials or books might consider package importing as optional, focusing on essential steps.
+      - Note:
+          - The number of steps may vary in different resources, ranging from five to seven.
+          - Steps 2 (Load and Register Driver) and 1 (Import Packages) can be optional depending on the JDBC version and project setup.
+          - The key is to focus on the essential steps of creating a connection, executing statements, processing results, and closing the connection.
+       
+### Postgres Library jar
+  - 1. IDE Selection:
+      - IntelliJ IDEA is chosen for coding in this section.
+      - Both community (free) and ultimate (paid) versions are available, and the community version is used in this case.
+  - 2. Project Setup:
+      - A new project named "Jdbc course" is created in IntelliJ IDEA.
+      - The language selected is Java, and the build system used is IntelliJ's default.
+  - 3. JDK Version:
+      - JDK 19 is used for the project, but any version above 8 is considered suitable.
+  - 4. External Libraries (JDBC Driver):
+      - The JDBC driver for PostgreSQL is required to establish a connection between Java and PostgreSQL.
+      - The process involves downloading the JDBC driver JAR file from the official PostgreSQL website or Maven Repository.
+  - 5. Library Integration:
+      - In IntelliJ IDEA, the downloaded JAR file is added as an external library.
+      - The steps include going to "File" > "Project Structure," selecting "Libraries," and adding the downloaded JAR.
+  - 6. Code Development Steps (7 Steps in JDBC):
+      - The speaker introduces the seven steps involved in JDBC, which include:
+          - 1. Importing the necessary packages (e.g., java.sql).
+          - 2. Loading and registering the JDBC driver (Note: JDBC 4.0 onwards may not require explicit loading and registration).
+          - 3. Establishing a connection to the database.
+          - 4. Executing a statement (equivalent to deciding what to say in a phone call analogy).
+          - 5. Processing the results obtained from the database.
+          - 6. Closing the connection to avoid memory leaks.
+          - 7. Note: Some versions or sources may have different step counts, but the core steps remain the same.
+  - 7. Coding Environment:
+      - IntelliJ IDEA is suggested for coding in Java with JDBC.
+      - The speaker indicates that the actual code implementation will follow in the next video.
+
+### Connecting Java and DB
+  - 1. Coding Steps in JDBC:
+      - The coding steps in JDBC are divided into seven key steps.
+      - These steps are:
+          - 1. Importing the necessary package (java.sql).
+          - 2. Loading and registering the JDBC driver (optional in some cases).
+          - 3. Creating a connection to the database.
+          - 4. Creating a statement (equivalent to deciding what to say in a phone call analogy).
+          - 5. Executing the statement.
+          - 6. Processing the results obtained from the database.
+          - 7. Closing the connection to avoid memory leaks.
+  - 2. Importing Packages:
+      - In the Java file, the first step involves importing the necessary package:
+          - import java.sql.*;
+  - 3. Loading and Registering Driver:
+      - The second step, loading and registering the driver, is optional.
+      - Example for PostgreSQL:
+          - Class.forName("org.postgresql.Driver");
+  - 4. Creating a Connection:
+      - The third step involves creating a connection to the database using DriverManager.getConnection.
+      - Example:
+          - Connection con = DriverManager.getConnection(URL, username, password);
+  - 5. Connection URL, Username, and Password:
+      - The connection URL is specific to the type of database (e.g., PostgreSQL, MySQL, Oracle).
+      - Example variables:
+          - String URL = "jdbc:postgresql://localhost:5432/demo";
+          - String username = "yourname";
+          - String password = "pass";
+  - 6. Testing Connection:
+      - A test is performed to print "Connection established" on the console.
+      - Initial mistakes are intentionally made to demonstrate error handling.
+      - The test includes incorrect database type and incorrect password.
+  - 7. Optional Driver Loading:
+      - The driver loading step is optional, and in many cases, it's not explicitly required, especially with JDBC 4.0 and later versions.
+  - 8. Error Handling:
+      - The lecture emphasizes the use of try-catch for exception handling.
+  - 9. Executing and Testing:
+      - The code is tested with intentional errors for incorrect database type and password.
+      - Corrections are made to ensure the successful establishment of a connection.
+  - 10. Optional Steps:
+      - Some steps are considered optional based on the specific JDBC version or use case.
+      - The video demonstrates commenting out the driver loading step to show it's not compulsory in certain scenarios.
+
+### Execute and Process
+  - 1. Connection Establishment:
+      - Successful establishment of the database connection is confirmed.
+      - Importing the package, loading the driver, and creating a connection are completed.
+  - 2. Purpose of Database Connection:
+      - The goal is to connect to a database using Java code for data retrieval.
+      - The example uses a database named "demo" with a table named "Student" having three columns and one row.
+  - 3. Objective: Fetching Data:
+      - The primary purpose of connecting to the database is to fetch data, specifically the name of a student based on their ID.
+  - 4. SQL Query for Data Retrieval:
+      - The SQL query for fetching the name of a student with ID 1 is demonstrated.
+      - Example: SELECT * FROM Student WHERE ID = 1
+  - 5. Statement Creation:
+      - To interact with the database, a Statement object is required.
+      - A reference object for Statement is created using the createStatement method of the Connection object.
+  - 6. Query Execution:
+      - The executeQuery method of the Statement interface is used to execute the SQL query.
+      - The result set is stored in a ResultSet object.
+  - 7. Result Set Handling:
+      - The ResultSet object is used to check if there is a next row using the next method.
+      - The method returns true if there is a next row, false otherwise.
+  - 8. Closing the Connection:
+      - The importance of closing the connection is emphasized.
+      - The close method is used to close the connection, ensuring proper resource management.
+  - 9. Data Retrieval and Printing:
+      - To retrieve and print data from the result set, methods like getString are used.
+      - Data is fetched based on column names or column numbers.
+      - Example: String name = rs.getString("sname");
+  - 10. Error Handling:
+      - The lecture mentions a crucial step that was initially overlooked: closing the connection.
+      - No specific error-handling mechanisms are discussed in this segment.
+  - 11. Pointer Positioning in Result Set:
+      - Explanation of the default position of the result set pointer before the first row.
+      - The importance of calling next to position the pointer correctly before fetching data.
+  - 12. Successful Data Retrieval:
+      - The successful execution of the program is demonstrated by fetching and printing the name of a student (Naveen) from the database.
+  - 13. Teaser for Advanced Concepts:
+      - The lecture ends with a teaser for upcoming topics, suggesting that more complex database interactions will be covered in the future.
+  - Code
+       ```java import java.sql.*;
+import static java.lang.Class.*;
+public class JDBCDemo {
+  public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+      String URL = "jdbc:postgresql://localhost:5432/Demo";
+      String username = "postgres";
+      String password = "root";
+
+      Class.forName("org.postgresql.Driver");
+      Connection con = DriverManager.getConnection(URL, username, password);
+
+      System.out.println("Connection Established");
+
+      // Your SQL query
+      String sql = "SELECT sname FROM student WHERE sid = 1";
+
+      // Create a statement
+      Statement st = con.createStatement();
+
+      // Execute the query
+      ResultSet rs = st.executeQuery(sql);
+
+      // Move to the first row in the result set
+      if (rs.next()) {
+          // Retrieve the value of the "sname" column
+          String name = rs.getString("sname");
+
+          // Print the result
+          System.out.println("Name of a student is " + name);
+      } else {
+          System.out.println("No records found.");
+      }
+
+      // Close the resources
+      rs.close();
+      st.close();
+      con.close();
+      System.out.println("Connection Closed");
+  }
+} ```
+
+### Fetching all Records
+  - 1. Objective: Inserting Data into Database
+      - Goal: Insert data into the database for fetching with different IDs.
+      - Utilize SQL queries for inserting records into the "Student" table.
+  - 2. SQL Insert Queries:
+      - Example SQL queries:
+          - Inserting data for ID 2: INSERT INTO student VALUES (2, 'Kiran', 50);
+          - Inserting data for ID 3: INSERT INTO student VALUES (3, 'Hirsch', 55);
+          - Inserting data for ID 4: INSERT INTO student VALUES (4, 'Social', 45); 
+  - 3. Verifying Inserted Data:
+      - Execute a SELECT query to verify that the data has been successfully inserted.
+      - Example: SELECT * FROM student;
+  - 4. Updating Java Code for Data Retrieval:
+      - Modify the Java code to fetch and print all rows and columns from the "Student" table.
+  - 5. Using ResultSet for Data Retrieval:
+      - Utilize the ResultSet object to iterate over rows and retrieve data for each column.
+  - 6. Automating Data Retrieval with a Loop:
+      - Use a while loop to iterate over rows until there is no next row.
+      - The next method checks for the next row and moves the pointer.
+  - 7. Fetching Data Using Column Numbers:
+      - Fetch data from the result set using both column numbers and column names.
+      - Example: int id = rs.getInt(1); or String name = rs.getString("sname");
+  - 8. Printing Data in a Readable Format:
+      - Print data with appropriate formatting to distinguish between rows and columns.
+  - Now, here is the complete code snippet used in this tutorial:
+    ```java
+    import java.sql.*;
+    public class JDBCDemo {
+      public static void main(String[] args) {
+          try {
+              String URL = "jdbc:postgresql://localhost:5432/Demo";
+              String username = "postgres";
+              String password = "root";
+    
+              // Load the PostgreSQL JDBC driver
+              Class.forName("org.postgresql.Driver");
+    
+              // Establish a connection
+              Connection con = DriverManager.getConnection(URL, username, password);
+    
+              System.out.println("Connection Established");
+    
+              // Create a statement
+              Statement st = con.createStatement();
+    
+              // Fetching all rows and columns
+              String query = "SELECT * FROM student";
+              ResultSet rs = st.executeQuery(query);
+    
+              // Iterating over rows and printing all columns
+              while (rs.next()) {
+                  int id = rs.getInt("sid");
+                  String name = rs.getString("sname");
+                  int marks = rs.getInt("smarks");
+    
+                  // Printing data with proper formatting
+                  System.out.println("ID: " + id + " - Name: " + name + " - Marks: " + marks);
+              }
+    
+              // Closing the resources
+              rs.close();
+              st.close();
+              con.close();
+              System.out.println("Connection closed");
+          } catch (ClassNotFoundException | SQLException e) {
+              e.printStackTrace();
+          }
+      }
+    }```
+
+          
+### Crud operations
+  - Fetching Data 
+      - Fetching a single data item and printing the entire table.
+      - Use of a while loop to count the number of rows.
+      - Possibility of automating column retrieval with an additional loop.
+      - Use of a for loop for columns to execute queries.
+  - Inserting Data
+      - Explanation of CRUD operations (Create, Read, Update, Delete).
+      - Changing SQL query to an insert query for adding a new record.
+      - Executing the insert query using execute method.
+      - Handling the Boolean status returned by execute.
+  - Updating Data
+      - Changing SQL query to an update query.
+      - Updating a specific record (e.g., changing a name from John to Max).
+      - Executing the update query using execute.
+  - Deleting Data
+      - Changing SQL query to a delete query.
+      - Deleting a specific record (e.g., deleting the record with ID 5).
+      - Executing the delete query using execute.
+  - Code Snippet:
+  - ```java
+      - // Establishing the connection (common for all operations)
+    Connection con = DriverManager.getConnection(URL, username, password);
+    Statement stmt = con.createStatement();
+    
+    // Inserting Data
+    String insertQuery = "INSERT INTO student VALUES (5, 'John', 48)";
+    boolean insertStatus = stmt.execute(insertQuery);
+    System.out.println("Insert Status: " + insertStatus);
+    
+    // Updating Data
+    String updateQuery = "UPDATE student SET name = 'Max' WHERE ID = 5";
+    boolean updateStatus = stmt.execute(updateQuery);
+    System.out.println("Update Status: " + updateStatus);
+    
+    // Deleting Data
+    String deleteQuery = "DELETE FROM student WHERE ID = 5";
+    boolean deleteStatus = stmt.execute(deleteQuery);
+    System.out.println("Delete Status: " + deleteStatus);
+    
+    // Closing the connection
+    stmt.close();
+    con.close();```
+
+### Problems with Statement
+  - 1. Introduction to Prepared Statements:
+      - Prepared statements are used in SQL to improve performance, avoid SQL injection, and simplify the process of inserting data into a database.
+      - They are particularly useful when dealing with user input, as they help prevent SQL injection vulnerabilities.
+  - 2. Need for Prepared Statements:
+      - Directly inserting data using concatenation and double quotes can lead to issues.
+      - Problems include treating values as strings, complex concatenation, and the risk of SQL injection attacks.
+      - Performance improvement is achieved by caching queries in the database.
+  - 3. Issues with Direct Insertion:
+      - Direct insertion involves concatenating values within double quotes, making it error-prone and confusing.
+      - SQL injection vulnerabilities arise when user input is directly incorporated into queries.
+  - 4. Benefits of Prepared Statements:
+      - Improved performance by caching queries.
+      - Prevention of SQL injection attacks.
+      - Simplification of the process of inserting data into a database.
+  - 5. Preventing SQL Injection:
+      - SQL injection occurs when user input contains malicious SQL code.
+      - Prepared statements help prevent SQL injection by separating SQL code from user input.
+  - 6. Improving Performance with Prepared Statements:
+      - Caching queries in the database is a key feature of prepared statements.
+      - Reusing the same query multiple times without resending it from Java to the database.
+  - Code Snippet: 
+      ```java
+    - // Direct insertion with concatenation (not recommended)
+    String query = "INSERT INTO student VALUES (" + CID + ", '" + name + "', " + marks + ")";
+    Statement statement = connection.createStatement();
+    statement.executeUpdate(query);
+    
+    // Issues with direct insertion and potential SQL injection vulnerabilities
+    
+    // Prepared statement example (to be covered in the next video)
+    String preparedQuery = "INSERT INTO student VALUES (?, ?, ?)";
+    PreparedStatement preparedStatement = connection.prepareStatement(preparedQuery);
+    preparedStatement.setInt(1, CID);
+    preparedStatement.setString(2, name);
+    preparedStatement.setInt(3, marks);
+    preparedStatement.executeUpdate(); ```
+
+
+  ### PreparedStatement
+  - 1. Introduction to Prepared Statements:
+      - Prepared statements are used to improve code readability, prevent SQL injection, and enhance performance.
+      - They are particularly useful when dealing with dynamic data coming from variables.
+  - 2. Building a Prepared Statement:
+      - Instead of directly inserting values into the SQL query, use placeholders (question marks) for dynamic data.
+      - Example: INSERT INTO student VALUES (?, ?, ?)
+  - 3. Using Prepared Statement in Java:
+      - Replace Statement with PreparedStatement when working with dynamic data.
+      - PreparedStatement pstmt = con.prepareStatement(sql);
+  - 4. Precompilation of Query:
+      - Prepared statements are precompiled, allowing for better performance and caching of queries.
+      - The SQL query is set during the creation of the prepared statement.
+  - 5. Setting Parameters in Prepared Statement:
+      - Use set methods to set parameters for the prepared statement.
+      - setInt(int parameterIndex, int x), setString(int parameterIndex, String x), etc.
+      - Parameters are replaced with actual data during execution.
+  - 6. Column Index in Prepared Statement:
+      - Columns are indexed starting from 1 in prepared statements.
+      - Example: setInt(1, CID) sets the value of the first parameter to the value of CID.
+  - 7. Data Types in Prepared Statement:
+      - Specify the data type using appropriate set methods (e.g., setInt, setString) based on the column type.
+  - 8. Benefits of Prepared Statements:
+      - Cleaner and clearer code compared to concatenation.
+      - Prevention of SQL injection vulnerabilities.
+      - Improved performance through precompilation and caching.
+  - 9. Example Code:
+    ```java
+    - // Creating a prepared statement
+    String sql = "INSERT INTO student VALUES (?, ?, ?)";
+    PreparedStatement pstmt = con.prepareStatement(sql);
+    
+    // Setting parameters for the prepared statement
+    pstmt.setInt(1, CID);
+    pstmt.setString(2, name);
+    pstmt.setInt(3, marks);
+    // Executing the prepared statement
+    pstmt.executeUpdate();``` 
+  - 10. Versatility of Prepared Statements:
+      - Prepared statements can be used not only for insertion but also for deletion, update, and select operations.
+      - Dynamic data is handled using placeholders that are replaced at runtime.
+  - 11. Verification and Testing:
+      - Execute the prepared statement to ensure it works as expected.
+        - Verify the results in the database to confirm the insertion.
+
+ 
+
 ## Section 4: Getting Started
 ## Section 5: Spring Boot
 ## Section 6: Spring Core - loC
