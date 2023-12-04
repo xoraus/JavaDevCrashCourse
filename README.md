@@ -20,6 +20,12 @@
    * [Crud operations](#crud-operations)
    * [Problems with Statement](#problems-with-statement)
 - [Section 4: Getting Started](#section-4-getting-started)
+   * [Introduction to Spring ](#introduction-to-spring)
+   * [Spring Documentation](#spring-documentation)
+   * [Prerequisites](#prerequisites)
+   * [Software Requirement](#software-requirement)
+   * [Spring Tool Suite (STS)](#spring-tool-suite-sts)
+   * [Dependency Injection](#dependency-injection)
 - [Section 5: Spring Boot](#section-5-spring-boot)
 - [Section 6: Spring Core - loC](#section-6-spring-core---loc)
 - [Section 7: Spring MVC](#section-7-spring-mvc)
@@ -657,7 +663,6 @@ public class JDBCDemo {
     preparedStatement.setInt(3, marks);
     preparedStatement.executeUpdate(); ```
 
-
   ### PreparedStatement
   - 1. Introduction to Prepared Statements:
       - Prepared statements are used to improve code readability, prevent SQL injection, and enhance performance.
@@ -706,6 +711,136 @@ public class JDBCDemo {
  
 
 ## Section 4: Getting Started
+
+### Introduction to Spring 
+  - 1. Introduction to Spring Framework:
+      - Spring Framework is a comprehensive framework for Java development.
+      - Considered one of the best frameworks for Java, offering a wide range of features and functionalities.
+  - 2. Evolution of Java Frameworks:
+      - Mention of previous frameworks like Struts and EJB for enterprise development.
+      - Spring has become a popular choice due to its versatility and features.
+  - 3. Focus on POJO (Plain Old Java Objects):
+      - Spring emphasizes the use of POJOs for development.
+      - Contrasts with EJB, where the focus was on Entities.
+      - Enables developers to achieve various tasks without the need for heavyweight components.
+  - 4. Spring as a Collection of Modules:
+      - Spring is not a monolithic framework; it comprises multiple projects/modules.
+      - Each module addresses specific concerns or features.
+      - Examples include modules for dependency injection, web development, REST, security, and database connectivity.
+  - 5. Dependency Injection in Spring:
+      - Introduction to Dependency Injection (DI) as a common feature of Spring.
+      - Dependency Injection is achieved using the Spring Core module.
+  - 6. Web Development with Spring MVC:
+      - Spring MVC is a module within the Spring Framework focused on web development.
+      - Provides features and components for building web applications.
+  - 7. Building RESTful Applications with Spring:
+      - Spring offers a dedicated module for building RESTful applications.
+      - Enables the creation of APIs following REST principles.
+  - 8. Security in Spring:
+      - Spring provides modules for handling security aspects in applications.
+      - Developers can leverage Spring for implementing secure authentication and authorization.
+  - 9. Database Connectivity with JPA in Spring:
+      - Spring includes modules for integrating with Java Persistence API (JPA) for database connectivity.
+      - Offers convenient features for database interaction.
+  - 10. Modularity and Extensibility:
+      - Spring's modular architecture allows developers to use only the modules relevant to their application.
+      - Extensibility enables integration with other frameworks and technologies.
+  - 11. Overview of Spring Modules:
+      - Discussion about various modules, including Spring Core, Spring MVC, Spring REST, and more.
+      - Each module serves a specific purpose, providing a tailored approach to application development.
+  - 12. Developer's Focus on Application Development:
+      - Spring Framework allows developers to focus more on application development.
+      - Handles many underlying concerns such as security, database connectivity, and dependency injection.
+
+### Spring Documentation
+  - The official website of Spring is spring.io, developed by Pivotal.
+  - Spring has various projects, including Spring Boot, Spring Framework, Spring Cloud, Spring Data, and Spring Security.
+  - The documentation for Spring is extensive and can be accessed in various formats, including EPUB and online.
+  - The documentation provides detailed information and guides for using different components of Spring.
+
+### Prerequisites
+  - Prerequisites for working with Spring framework include knowledge of Java, database connectivity, Servlet and JSP, and ORM frameworks like Hibernate. Optional concepts include understanding of internet protocols, Spring Security, LDAP, and OAuth.
+  - Highlights
+      - 💡 Prerequisites for Spring include Java, database connectivity, Servlet and JSP, and ORM frameworks.
+      - 💡 Optional concepts include internet protocols, Spring Security, LDAP, and OAuth.
+  - Bullet Points
+      - 💻 Knowledge of Java, including OOPs, exception handling, threads, and loops, is essential for working with Spring.
+      - 🗄️ Understanding database connectivity, such as MySQL or Postgres with Java, is important.
+      - 🌐 Familiarity with Servlet and JSP is necessary as all Spring applications run on a servlet container like Tomcat.
+      - 📚 Knowledge of ORM frameworks like Hibernate or iBATIS is recommended.
+      - 🌍 Optional concepts to learn include internet protocols, Spring Security, LDAP, and OAuth.
+
+### Software Requirement
+  - It is recommended to use an Integrated Development Environment (IDE) for writing and running the code.
+  - Some popular IDEs for Java development are NetBeans, Eclipse, and IntelliJ.
+  - Spring Tool Suite (STS) is a separate IDE provided by Spring for writing Spring code. It is based on Eclipse and can be downloaded for free.
+  - STS is not mandatory to use, and you can still use NetBeans or Eclipse if you prefer.
+  - STS can be downloaded from the official Spring website.
+  - STS is essentially Eclipse with a Spring layer on top, so if you are familiar with Eclipse, you will have no trouble using STS.
+  - It is recommended to have JDK (Java Development Kit) installed before installing STS.
+  - The suggested JDK version for working with Spring 5 is JDK 8, as it supports the required features like reactive programming and lambda expressions.
+  - However, Spring 5 also supports Java 9, so if you have Java 9 installed, you can use its features as well.
+  - Once the STS download is complete, it needs to be installed
+
+### Spring Tool Suite (STS)
+  - Spring Tool Suite (STS) is a development environment based on Eclipse that is specifically designed for developing Spring applications.
+  - To install STS, you need to unzip the downloaded zip file and ensure that you give the unzipped folder a small name to avoid issues.
+  - STS includes a pre-configured version of Tomcat called Pivotal tc-server, which eliminates the need to download Tomcat separately.
+  - STS looks and functions similar to Eclipse, as it is built on the Eclipse platform.
+  - The main sections of STS are the Project section (where all the projects are located), the code editor area, and the console section (where logs are printed).
+  - STS supports the creation of various types of projects, including Spring setup projects, Spring legacy projects, and Java projects.
+  - When working with the Spring framework, it is necessary to add Spring dependencies to the project.
+  - Maven, a build tool, can be used to manage dependencies and automatically download them for the project.
+  - To create a Maven project in STS, you need to select the "Maven Project" option and provide a name and group ID for the project.
+  - Maven uses a pom.xml file to specify dependencies. You can add additional dependencies by editing the pom.xml file.
+  - Gradle is an alternative build tool to Maven that can also be used in STS.
+  - To find and download dependencies, you can search for them on the Maven Repository website and copy the dependency information into the pom.xml file.
+  - STS automatically downloads the specified dependencies when the project is built.
+  - After adding the necessary dependencies, you can start writing your Spring application
+
+### Dependency Injection
+  - 1. Introduction to Spring Core:
+      - Spring Core is a fundamental module in the Spring Framework.
+      - Addresses the issue of dependencies in software development.
+  - 2. Understanding Object-Oriented Programming (OOP):
+      - In Java, everything is treated as an object in object-oriented programming.
+      - Objects have properties and behaviors.
+  - 3. Challenge with Object Creation:
+      - Creating multiple objects can be cumbersome and error-prone.
+      - Issues arise when managing the lifecycle of objects and their dependencies.
+  - 4. Dependency Injection (DI):
+      - Dependency Injection is a key concept in Spring Core.
+      - It addresses the challenges of managing object dependencies by injecting them from outside the class.
+  - 5. Example of Building a Laptop:
+      - Illustration of the need for dependencies in building a laptop.
+      - A laptop requires components like a hard drive, RAM, CPU, etc.
+  - 6. Issues with Manual Object Creation:
+      - Manual creation of objects leads to responsibility for managing their lifecycle and destruction.
+      - Lack of flexibility when dealing with changing requirements.
+  - 7. Dependency Injection and Inversion of Control (IoC):
+      - Dependency Injection is often synonymous with Inversion of Control (IoC).
+      - IoC means that the control over object creation and management is inverted or delegated to a container (Spring, in this case).
+  - 8. Role of a Dependency Injection Container:
+      - Spring acts as a Dependency Injection Container.
+      - The container is responsible for managing the creation, configuration, and lifecycle of objects.
+  - 9. Advantages of Dependency Injection in Spring:
+      - Decouples the class from its dependencies, promoting modularity.
+      - Easier to test as dependencies can be mocked or replaced.
+      - Promotes a cleaner and more maintainable codebase.
+  - 10. Configuration in Spring Core:
+      - Configuration is required to enable dependency injection in Spring.
+      - The configuration specifies how dependencies are injected into the application.
+  - 11. Inversion of Control (IoC) in Spring:
+      - IoC in Spring means that the framework takes control of managing the objects and their dependencies.
+      - Developers don't need to create and manage objects manually.
+  - 12. Configuration in Spring Core:
+      - Configuration involves specifying the dependencies in a configuration file or using annotations.
+      - Spring will then inject the dependencies at runtime.
+  - 13. Introduction to "Magic" and Configuration:
+      - Acknowledgment that configuration is required, but Spring simplifies the process.
+      - It might seem like magic, but it's achievable through proper configuration.
+
+
 ## Section 5: Spring Boot
 ## Section 6: Spring Core - loC
 ## Section 7: Spring MVC
